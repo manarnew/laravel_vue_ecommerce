@@ -1,19 +1,6 @@
 <template>
-    <!--
-      This example requires updating your template:
-  
-      ```
-      <html class="h-full bg-white">
-      <body class="h-full">
-      ```
-    -->
-    <div class="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-      <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-        <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">Set new password</h2>
-      </div>
-  
-      <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form class="space-y-6" action="#" method="POST">
+  <GuestLayout title="Set new password">
+    <form class="space-y-6" action="#" method="POST">
           <div>
             <label for="new-password" class="block text-sm/6 font-medium text-gray-900">New Password</label>
             <div class="mt-2">
@@ -35,12 +22,9 @@
           </div>
         </form>
   
-     
-     
-      </div>
-    </div>
-  </template>
+  </GuestLayout>
+</template>
 <script setup>
-
+import GuestLayout from '../components/GuestLayout.vue';
 </script>
   
