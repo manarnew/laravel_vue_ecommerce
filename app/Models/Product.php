@@ -13,8 +13,7 @@ class Product extends Model
     use HasFactory;
     use HasSlug;
     use SoftDeletes;
-
-
+    protected $guarded = [];
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()

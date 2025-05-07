@@ -9,7 +9,7 @@
            Dashboard
          </span>
        </router-link>
-       <router-link to="#"
+         <router-link :to="{name: 'app.products'}"
          class="flex items-center p-2 rounded transition-color hover:bg-black/30" >
         <span class="mr-2">
             <ViewColumnsIcon class="w-4"/>

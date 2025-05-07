@@ -2,52 +2,47 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProductRequest;
-use App\Http\Resources\ProductListResource;
-use App\Http\Resources\ProductResource;
 use App\Models\Product;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        return ProductListResource::collection(Product::query()->paginate(10));
+        $products = Product::query()->orderBy('updated_at', 'desc')->paginate(5);
+        return view('products.index', compact('products'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(ProductRequest $request)
+    public function create()
     {
-        return new ProductResource(product::create($request->validated()));
+        return view('products.create');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Product $product)
+    public function store(Request $request)
     {
-        return new ProductResource($product);
+        // Validate and store the product
+        // Redirect or return a response
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(ProductRequest $request, Product $product)
+    public function show($id)
     {
-        $product->update($request->validated());
-        return new ProductResource($product);
+        return view('products.show', compact('id'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Product $product)
+    public function edit($id)
     {
-        $product->delete();
-        return response()->noContent();
+        return view('products.edit', compact('id'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        // Validate and update the product
+        // Redirect or return a response
+    }
+
+    public function destroy($id)
+    {
+        // Delete the product
+        // Redirect or return a response
     }
 }

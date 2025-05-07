@@ -22,7 +22,7 @@ import {ref,onMounted,onUnmounted,computed} from "vue"
 import Sidebar from "./Sidebar.vue"
 import Navbar from "./Navbar.vue";
 import store from "@/store";
-import Spinner from "./Spinner.vue";
+import Spinner from "./core/Spinner.vue";
 const currentUser = computed(()=> store.state.user.data);
 const { title } = defineProps({
   title: String
