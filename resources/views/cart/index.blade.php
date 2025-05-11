@@ -12,7 +12,7 @@
                         'title' => $product->title,
                         'price' => $product->price,
                         'quantity' => $cartItems[$product->id]['quantity'],
-                        'href' => route('product.view', $product->slug),
+                        'href' => route('products.view', $product->slug),
                         'removeUrl' => route('cart.remove', $product),
                         'updateQuantityUrl' => route('cart.update-quantity', $product),
                     ],
@@ -67,7 +67,7 @@
                             Shipping and taxes calculated at checkout.
                         </p>
 
-                        <form action="{{ route('cart.checkout') }}" method="post">
+                        <form action="#" method="post">
                             @csrf
                             <button type="submit" class="btn-primary w-full py-3 text-lg">
                                 Proceed to Checkout
