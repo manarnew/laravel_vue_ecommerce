@@ -43,9 +43,9 @@ class CheckoutController extends Controller
             $quantity = $cartItems[$product->id]['quantity'];
             if ($product->quantity !== null && $product->quantity < $quantity) {
                 $message = match ($product->quantity) {
-                    0 => 'The product "'.$product->title.'" is out of stock',
-                    1 => 'There is only one item left for product "'.$product->title,
-                    default => 'There are only ' . $product->quantity . ' items left for product "'.$product->title,
+                    0 => 'The product "' . $product->title . '" is out of stock',
+                    1 => 'There is only one item left for product "' . $product->title,
+                    default => 'There are only ' . $product->quantity . ' items left for product "' . $product->title,
                 };
                 return redirect()->back()->with('error', $message);
             }
@@ -76,9 +76,6 @@ class CheckoutController extends Controller
                 $product->save();
             }
         }
-//        dd(route('checkout.failure', [], true));
-
-//        dd(route('checkout.success', [], true) . '?session_id={CHECKOUT_SESSION_ID}');
 
         $session = \Stripe\Checkout\Session::create([
             'line_items' => $lineItems,
@@ -116,11 +113,10 @@ class CheckoutController extends Controller
                 'session_id' => $session->id
             ];
             Payment::create($paymentData);
-
         } catch (\Exception $e) {
             DB::rollBack();
 
-            Log::critical(__METHOD__ . ' method does not work. '. $e->getMessage());
+            Log::critical(__METHOD__ . ' method does not work. ' . $e->getMessage());
             throw $e;
         }
 
@@ -179,7 +175,7 @@ class CheckoutController extends Controller
                     'currency' => 'usd',
                     'product_data' => [
                         'name' => $item->product->title,
-//                        'images' => [$product->image]
+                        //                        'images' => [$product->image]
                     ],
                     'unit_amount' => $item->unit_price * 100,
                 ],
@@ -213,7 +209,9 @@ class CheckoutController extends Controller
 
         try {
             $event = \Stripe\Webhook::constructEvent(
-                $payload, $sig_header, $endpoint_secret
+                $payload,
+                $sig_header,
+                $endpoint_secret
             );
         } catch (\UnexpectedValueException $e) {
             // Invalid payload
@@ -235,7 +233,7 @@ class CheckoutController extends Controller
                 if ($payment) {
                     $this->updateOrderAndSession($payment);
                 }
-            // ... handle other event types
+                // ... handle other event types
             default:
                 echo 'Received unknown event type ' . $event->type;
         }
@@ -256,7 +254,7 @@ class CheckoutController extends Controller
             $order->update();
         } catch (\Exception $e) {
             DB::rollBack();
-            Log::critical(__METHOD__ . ' method does not work. '. $e->getMessage());
+            Log::critical(__METHOD__ . ' method does not work. ' . $e->getMessage());
             throw $e;
         }
 
@@ -269,7 +267,7 @@ class CheckoutController extends Controller
                 Mail::to($user)->send(new NewOrderEmail($order, (bool)$user->is_admin));
             }
         } catch (\Exception $e) {
-            Log::critical('Email sending does not work. '. $e->getMessage());
+            Log::critical('Email sending does not work. ' . $e->getMessage());
         }
     }
 }
