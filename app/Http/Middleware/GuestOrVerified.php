@@ -3,23 +3,22 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\Response;
 
-class GuestOrVerified extends EnsureEmailIsVerified
+class GuestOrVerified extends \Illuminate\Auth\Middleware\EnsureEmailIsVerified
 {
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
+     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
     public function handle($request, Closure $next, $redirectToRoute = null)
     {
         if (!$request->user()) {
             return $next($request);
         }
-        return Parent::handle($request, $next, $redirectToRoute);
+        return parent::handle($request, $next, $redirectToRoute);
     }
 }

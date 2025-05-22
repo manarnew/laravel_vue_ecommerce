@@ -1,3 +1,3 @@
 <x-app-layout>
-    welcome
+    Test
 </x-app-layout>
