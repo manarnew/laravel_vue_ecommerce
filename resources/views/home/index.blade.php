@@ -1,6 +1,6 @@
 <x-app-layout>
     <!-- Hero Section with Phone Image -->
-    <section class="bg-slate-800 text-white">
+    <section class="bg-indigo-700 text-white">
         <div class="container mx-auto px-4 py-8 sm:py-12 md:py-16">
             <div class="flex flex-col-reverse md:flex-row items-center gap-6 md:gap-12">
                 <!-- Text Content -->
@@ -45,19 +45,15 @@
 
     <!-- Categories Section -->
     <section class="py-12 bg-white">
-        <div class="container mx-auto px-4" x-data="{
-            categories: {{ $categories->toJson() }},
-        }">
-            <h2 class ="text-3xl font-bold text-center mb-12">Shop by
-                Category</h2>
+        <div class="container mx-auto px-4">
+            <h2 class ="text-3xl font-bold text-center mb-12">Shop by Category</h2>
             <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
-
-                <template x-for="category in categories" :key="category.id">
-                    <a href="#"
+                @foreach ($categories as $item)
+                    <a href="{{ route('byCategory', $item) }}"
                         class="bg-gray-50 hover:bg-indigo-50 rounded-lg p-6 text-center transition duration-300 border border-gray-100 hover:border-indigo-200">
-                        <h3 class="font-medium text-gray-800" x-text="category.name"></h3>
+                        <h3 class="font-medium text-gray-800">{{ $item->name }}</h3>
                     </a>
-                </template>
+                    @endforeach
             </div>
         </div>
     </section>
@@ -95,7 +91,7 @@
     </section>
 
     <!-- Banner Section -->
-    <section class="py-12 bg-slate-800 text-white">
+    <section class="py-12 bg-indigo-700 text-white">
         <div class="container mx-auto px-4 text-center">
             <h2 class="text-3xl font-bold mb-4">Free Shipping on Orders Over $50</h2>
             <p class="text-xl mb-6">Shop now and get free delivery on your doorstep</p>
