@@ -18,8 +18,6 @@ class ProductController extends Controller
 
     public function byCategory(Category $category)
     {
-
-
         $categories = Category::getAllChildrenByParent($category);
 
         $query = Product::query()
@@ -58,8 +56,10 @@ class ProductController extends Controller
             })
 
             ->paginate(5);
+
         return view('product.index', [
             'products' => $products
         ]);
+
     }
 }

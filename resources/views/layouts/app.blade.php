@@ -23,9 +23,7 @@
     <main class="p-5">
         {{ $slot }}
     </main>
-
     @include('layouts.footer')
-
     <!-- Toast -->
     <div x-data="toast" x-show="visible" x-transition x-cloak
         @notify.window="show($event.detail.message, $event.detail.type || 'success')"

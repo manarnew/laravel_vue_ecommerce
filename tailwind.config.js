@@ -1,5 +1,4 @@
-import defaultTheme from 'tailwindcss/defaultTheme';
-import forms from '@tailwindcss/forms';
+const defaultTheme = require('tailwindcss/defaultTheme');
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -12,14 +11,10 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
         },
     },
 
-    plugins: [
-        forms,
-        require('@tailwindcss/aspect-ratio'),
-
-    ],
+    plugins: [require('@tailwindcss/forms'), require('@tailwindcss/aspect-ratio')],
 };
